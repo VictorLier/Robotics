@@ -49,7 +49,7 @@ def get_angles(pos, initial_guess) -> np.ndarray:
     eq4 = sp.Eq(x_04[2], 0)
     
     # Solve numerically
-    solution = sp.nsolve((eq1, eq2, eq3, eq4), [theta0, theta1, theta2, theta3], initial_guess, tol=1e-6)
+    solution = sp.nsolve((eq1, eq2, eq3, eq4), [theta0, theta1, theta2, theta3], initial_guess, tol=1e-4)
     #convert to degrees
     solution = [s for s in solution]
     
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     ADDR_MX_PUNCH = 48
     PROTOCOL_VERSION = 1.0
     DXL_IDS = [1,2,3,4]
-    DEVICENAME = "COM5"
+    DEVICENAME = "COM6"
     BAUDRATE = 1000000
     TORQUE_ENABLE = 1
     TORQUE_DISABLE = 0
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
 
     # Initial guess
-    initial_guess = [1, 10, 10, 1]
+    initial_guess = [1, 1, 1, 1]
 
     angles = np.zeros((num_points, 4))
 
@@ -131,9 +131,9 @@ if __name__ == "__main__":
 
         step = angles[i] * steps_per_degree
         step[0] = step[0] + 512
-        step[1] = step[1] + 205
+        step[1] = step[1] + 512
         step[2] = step[2] + 512
-        step[3] = step[3] + 830
+        step[3] = step[3] + 512
 
 
         step = step.astype(int)
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         packetHandler.write2ByteTxRx(portHandler, 3, ADDR_MX_GOAL_POSITION, pos3)
         packetHandler.write2ByteTxRx(portHandler, 4, ADDR_MX_GOAL_POSITION, pos4)
 
-        time.sleep(1)
+        time.sleep(5)
 
     
 
