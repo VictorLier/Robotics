@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     radius = 32e-3
 
-    num_points = 200
+    num_points = 36
 
     angles = np.linspace(0, 2*np.pi, num_points)
     angles = angles
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     ADDR_MX_PUNCH = 48
     PROTOCOL_VERSION = 1.0
     DXL_IDS = [1,2,3,4]
-    DEVICENAME = "COM6"
+    DEVICENAME = "COM8"
     BAUDRATE = 1000000
     TORQUE_ENABLE = 1
     TORQUE_DISABLE = 0
@@ -125,6 +125,8 @@ if __name__ == "__main__":
             angle = np.array(angle, dtype=np.float64)
             angles[i] = angle
 
+
+
     steps_per_degree = 1023/300
 
   
@@ -151,7 +153,7 @@ if __name__ == "__main__":
         packetHandler.write2ByteTxRx(portHandler, 3, ADDR_MX_GOAL_POSITION, pos3)
         packetHandler.write2ByteTxRx(portHandler, 4, ADDR_MX_GOAL_POSITION, pos4)
 
-        time.sleep(0.01)
+        time.sleep(1)
 
     
 

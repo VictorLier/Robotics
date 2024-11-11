@@ -11,7 +11,7 @@ ADDR_MX_PRESENT_POSITION = 36
 ADDR_MX_PUNCH = 48
 PROTOCOL_VERSION = 1.0
 DXL_IDS = [1,2,3,4]
-DEVICENAME = "COM3"
+DEVICENAME = "COM8"
 BAUDRATE = 1000000
 TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
@@ -29,13 +29,13 @@ for DXL_ID in DXL_IDS:
 
 # Move motor 1
 
-if True: # Default values
+if False: # Default values
     pos1 = 512
     pos2 = 512
     pos3 = 512
     pos4 = 512
 
-if False: # Camera calibration position
+if True: # Camera calibration position
     pos1 = 512
     pos2 = 512
     pos3 = 546 # 10 deg tilt to get camera to look at the ground
