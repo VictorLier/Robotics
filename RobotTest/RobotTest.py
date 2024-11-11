@@ -11,7 +11,7 @@ ADDR_MX_PRESENT_POSITION = 36
 ADDR_MX_PUNCH = 48
 PROTOCOL_VERSION = 1.0
 DXL_IDS = [1,2,3,4]
-DEVICENAME = "COM6"
+DEVICENAME = "COM3"
 BAUDRATE = 1000000
 TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
@@ -28,11 +28,23 @@ for DXL_ID in DXL_IDS:
     packetHandler.write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_MOVING_SPEED, 50)
 
 # Move motor 1
-# Default values
-pos1 = 512
-pos2 = 512
-pos3 = 512
-pos4 = 512
+
+if True: # Default values
+    pos1 = 512
+    pos2 = 512
+    pos3 = 512
+    pos4 = 512
+
+if False: # Camera calibration position
+    pos1 = 512
+    pos2 = 512
+    pos3 = 546 # 10 deg tilt to get camera to look at the ground
+    pos4 = 171 # maximum tilt of camera - 10 degrees from vertical
+
+    # Camera width
+    pixelwidth = 0.12/1116 # The size of a pixel in meters taken from the camera calibration position
+
+
 
 packetHandler.write2ByteTxRx(portHandler, 1, ADDR_MX_GOAL_POSITION, pos1)
 packetHandler.write2ByteTxRx(portHandler, 2, ADDR_MX_GOAL_POSITION, pos2)

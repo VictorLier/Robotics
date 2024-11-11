@@ -12,8 +12,11 @@ cv2.createTrackbar("UH", "Tracking", 255, 255, nothing)
 cv2.createTrackbar("US", "Tracking", 255, 255, nothing)
 cv2.createTrackbar("UV", "Tracking", 255, 255, nothing)
 
+capture1 = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+ret, frame = capture1.read()
+cv2.VideoCapture(0).release()
+
 while True:
-    frame = cv2.imread('OpenCVTest/smarties.jpg')
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
