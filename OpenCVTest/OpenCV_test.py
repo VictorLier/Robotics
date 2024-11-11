@@ -61,6 +61,7 @@ points = np.array([cx, cy]).T
 point_sort = sorted(points, key=lambda point: point[0]**2 + point[1]**2)
 
 
+print("Stop")
 
 cv.imshow('image', image)
 cv.imshow('mask', mask)
