@@ -49,7 +49,7 @@ def get_angles(pos, initial_guess) -> np.ndarray:
     eq4 = sp.Eq(x_04[2], 0)
     
     # Solve numerically
-    solution = sp.nsolve((eq1, eq2, eq3, eq4), [theta0, theta1, theta2, theta3], initial_guess, tol=1e-4)
+    solution = sp.nsolve((eq1, eq2, eq3, eq4), [theta0, theta1, theta2, theta3], initial_guess, tol=1e-6)
     #convert to degrees
     solution = [s for s in solution]
     
@@ -66,13 +66,14 @@ if __name__ == "__main__":
 
     radius = 32e-3
 
-    num_points = 36
+    num_points = 200
 
     angles = np.linspace(0, 2*np.pi, num_points)
+    angles = angles
 
-    x_coord = circle_center_x + radius*np.cos(angles)
-    y_coord = circle_center_y + radius*np.sin(angles)
-    z_coord = circle_center_z*np.ones(num_points)
+    x_coord = circle_center_x*np.ones(num_points)
+    y_coord = circle_center_y + radius*np.cos(angles)
+    z_coord = circle_center_z + radius*np.sin(angles)
 
     points = np.vstack((x_coord, y_coord, z_coord)).T
 
@@ -115,7 +116,7 @@ if __name__ == "__main__":
 
 
     # Initial guess
-    initial_guess = [1, 1, 1, 1]
+    initial_guess = [0.210182586676604, -0.140623923276670, -1.66990262183703, 0.239730218318808]
 
     angles = np.zeros((num_points, 4))
 
@@ -129,15 +130,13 @@ if __name__ == "__main__":
   
     for i in range(num_points):
 
-        step = angles[i] * steps_per_degree
+        step = angles[i] * 180/np.pi  * steps_per_degree
         step[0] = step[0] + 512
         step[1] = step[1] + 512
-        step[2] = step[2] + 512
+        step[2] = step[2] + 512 + steps_per_degree*90
         step[3] = step[3] + 512
 
-
-        step = step.astype(int)
-    
+        step = step.astype(int)    
         print(step)
 
         # Move motor 1
@@ -152,7 +151,7 @@ if __name__ == "__main__":
         packetHandler.write2ByteTxRx(portHandler, 3, ADDR_MX_GOAL_POSITION, pos3)
         packetHandler.write2ByteTxRx(portHandler, 4, ADDR_MX_GOAL_POSITION, pos4)
 
-        time.sleep(5)
+        time.sleep(0.01)
 
     
 
