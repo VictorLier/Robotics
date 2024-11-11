@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 
 
 # import image
-image = cv.imread('OpenCVTest/smarties.jpg')
+capture1 = cv.VideoCapture(1, cv.CAP_DSHOW)
+ret, image = capture1.read()
+cv.VideoCapture(0).release()
 
 # Convert image to HSV
 image_hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
@@ -15,8 +17,8 @@ image_hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
 image_wh = np.zeros(image.shape, dtype=np.uint8)
 
 # mask
-l_b = np.array([172, 137, 0])
-u_b = np.array([255, 255, 255])
+l_b = np.array([0, 123, 75])
+u_b = np.array([19, 255, 153])
 
 mask = cv.inRange(image_hsv, l_b, u_b)
 
