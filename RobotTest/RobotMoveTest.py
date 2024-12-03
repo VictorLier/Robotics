@@ -46,7 +46,7 @@ def get_angles(pos, initial_guess) -> np.ndarray:
     eq1 = sp.Eq(o_04[0], pos[0])
     eq2 = sp.Eq(o_04[1], pos[1])
     eq3 = sp.Eq(o_04[2], pos[2])
-    eq4 = sp.Eq(x_04[2], 0)
+    eq4 = sp.Eq(x_04[2], -1)
     
     # Solve numerically
     solution = sp.nsolve((eq1, eq2, eq3, eq4), [theta0, theta1, theta2, theta3], initial_guess, tol=1e-6)
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     # Circle points
     circle_center_x = 150e-3
     circle_center_y = 0e-3
-    circle_center_z = 120e-3
+    circle_center_z = 50e-3
 
     radius = 32e-3
 
@@ -135,7 +135,7 @@ if __name__ == "__main__":
         step = angles[i] * 180/np.pi  * steps_per_degree
         step[0] = step[0] + 512
         step[1] = step[1] + 512
-        step[2] = step[2] + 512 + steps_per_degree*90
+        step[2] = step[2] + 512 #+ steps_per_degree*90
         step[3] = step[3] + 512
 
         step = step.astype(int)    

@@ -29,16 +29,16 @@ for DXL_ID in DXL_IDS:
 
 # Move motor 1
 
-if False: # Default values
+if True: # Default values
     pos1 = 512
     pos2 = 512
     pos3 = 512
     pos4 = 512
 
-if True: # Camera calibration position
+if False: # Camera calibration position
     pos1 = 512
     pos2 = 512
-    pos3 = 546 # 10 deg tilt to get camera to look at the ground
+    pos3 = 239 # 10 deg tilt to get camera to look at the ground
     pos4 = 171 # maximum tilt of camera - 10 degrees from vertical
 
     # Camera width
